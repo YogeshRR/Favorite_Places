@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 import { Colors } from "../../Constants/Colors";
+import ImagePicker from "./ImagePicker";
 
 function PlaceForm() {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -17,6 +18,7 @@ function PlaceForm() {
           value={enteredTitle}
         />
       </View>
+      <ImagePicker />
     </ScrollView>
   );
 }
