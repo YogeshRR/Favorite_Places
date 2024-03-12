@@ -28,5 +28,7 @@ const styles = StyleSheet.create({
 
   fallBackText: {
     fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
