@@ -17,6 +17,8 @@ function PlaceList({ places }) {
   );
 }
 
+export default PlaceList;
+
 const styles = StyleSheet.create({
   fallBackContainer: {
     flex: 1,
