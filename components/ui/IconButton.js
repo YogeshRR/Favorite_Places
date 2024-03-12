@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "center",
     justifyContent: "center",
-    margin: 4,
   },
   pressed: {
     opacity: 0.75,

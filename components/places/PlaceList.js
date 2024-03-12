@@ -1,4 +1,5 @@
 import { FlatList, View, Text, StyleSheet } from "react-native";
+import { Colors } from "../../Constants/Colors";
 
 function PlaceList({ places }) {
   if (!places || places.length === 0) {
@@ -30,5 +31,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+    color: Colors.primary200,
   },
 });
