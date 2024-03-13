@@ -1,4 +1,4 @@
-import { Alert, Button, Image, View, StyleSheet, Text } from "react-native";
+import { Alert, Image, View, StyleSheet, Text } from "react-native";
 import {
   launchCameraAsync,
   useCameraPermissions,
