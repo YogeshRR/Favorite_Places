@@ -7,6 +7,8 @@ import {
 import { useState } from "react";
 import { Colors } from "../../Constants/Colors";
 
+import OutlinedButton from "../ui/OutlinedButton";
+
 function ImagePicker() {
   const [imageName, setImageName] = useState("");
   const [cameraPermissionInformation, requestForPermission] =
@@ -52,7 +54,10 @@ function ImagePicker() {
   return (
     <View>
       <View style={styles.imagePreview}>{imageSource}</View>
-      <Button title="Take Image" onPress={takeImageHandler} />
+      <OutlinedButton icon="camera" onPress={takeImageHandler}>
+        {" "}
+        Take Photo{" "}
+      </OutlinedButton>
     </View>
   );
 }
