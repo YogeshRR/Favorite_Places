@@ -1,5 +1,7 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Image, Text } from "react-native";
+import { useState } from "react";
 import { Colors } from "../../Constants/Colors";
+
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
@@ -8,9 +10,15 @@ import {
 
 import OutlinedButton from "../ui/OutlinedButton";
 
+const GEOAPIFY_KEY = "6e109e58697b49b2bbe3a76f5f46df96";
+const lat = "";
+const long = "";
+
 function LocationPicker() {
+  const [pickedUserLocation, setPickedUserLocation] = useState();
   const [locationInformationPermission, setLocationInformationPermission] =
     useForegroundPermissions();
+
   async function verifyPermissionStatus() {
     if (
       locationInformationPermission.status === PermissionStatus.UNDETERMINED
@@ -37,12 +45,29 @@ function LocationPicker() {
       return;
     }
     const location = await getCurrentPositionAsync();
-    console.log(location);
+    setPickedUserLocation({
+      lat: location.coords.latitude,
+      longt: location.coords.longitude,
+    });
   }
+  var mapPreViewInstance = <Text>Currently user not found</Text>;
+  if (pickedUserLocation) {
+    mapPreViewInstance = (
+      <Image
+        style={styles.image}
+        source={{
+          uri: `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=200&center=lonlat:${pickedUserLocation.longt},${pickedUserLocation.lat}&zoom=14&apiKey=${GEOAPIFY_KEY}`,
+        }}
+      />
+    );
+  }
+  if (mapPreViewInstance) {
+  }
+
   function getMapPreview() {}
   return (
     <View>
-      <View style={styles.mapPreView}></View>
+      <View style={styles.mapPreView}>{mapPreViewInstance}</View>
       <View style={styles.actions}>
         <OutlinedButton icon="location" onPress={getUserLocationMap}>
           User Location
@@ -65,9 +90,14 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
   },
   actions: {
     flexDirection: "row",
     justifyContent: "center",
+  },
+  image: {
+    height: "100%",
+    width: "100%",
   },
 });
