@@ -1,6 +1,7 @@
 import { View, StyleSheet, Alert, Image, Text } from "react-native";
 import { useState } from "react";
 import { Colors } from "../../Constants/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   getCurrentPositionAsync,
@@ -18,7 +19,7 @@ function LocationPicker() {
   const [pickedUserLocation, setPickedUserLocation] = useState();
   const [locationInformationPermission, setLocationInformationPermission] =
     useForegroundPermissions();
-
+  const navigation = useNavigation();
   async function verifyPermissionStatus() {
     if (
       locationInformationPermission.status === PermissionStatus.UNDETERMINED
@@ -64,7 +65,9 @@ function LocationPicker() {
   if (mapPreViewInstance) {
   }
 
-  function getMapPreview() {}
+  function getMapPreview() {
+    navigation.navigate("Maps");
+  }
   return (
     <View>
       <View style={styles.mapPreView}>{mapPreViewInstance}</View>
