@@ -2,7 +2,7 @@ import MapView, { Marker } from "react-native-maps";
 import { Alert, StyleSheet } from "react-native";
 import { useState, useLayoutEffect, useCallback } from "react";
 import IconButton from "./ui/IconButton";
-import AddPlace from "../screens/AddPlace";
+
 export function Maps({ navigation }) {
   const [selectedLocation, setSelectedLocation] = useState();
   function selectLocation(event) {
