@@ -14,7 +14,7 @@ import {
 } from "expo-location";
 
 import OutlinedButton from "../ui/OutlinedButton";
-import PlaceForm from "./PlaceForm";
+
 import { getAddress } from "./util/Locations";
 
 const GEOAPIFY_KEY = "6e109e58697b49b2bbe3a76f5f46df96";
