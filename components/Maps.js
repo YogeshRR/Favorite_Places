@@ -6,7 +6,6 @@ import IconButton from "./ui/IconButton";
 export function Maps({ navigation }) {
   const [selectedLocation, setSelectedLocation] = useState();
   function selectLocation(event) {
-    console.log("I am printed");
     const lat = event.nativeEvent.coordinate.latitude;
     const long = event.nativeEvent.coordinate.longitude;
     setSelectedLocation({

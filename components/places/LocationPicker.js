@@ -15,6 +15,7 @@ import {
 
 import OutlinedButton from "../ui/OutlinedButton";
 import PlaceForm from "./PlaceForm";
+import { getAddress } from "./util/Locations";
 
 const GEOAPIFY_KEY = "6e109e58697b49b2bbe3a76f5f46df96";
 const lat = "";
@@ -41,7 +42,16 @@ function LocationPicker({ onLocationPicker }) {
   }, [route]);
 
   useEffect(() => {
-    onLocationPicker(pickedUserLocation);
+    async function saveAddress() {
+      if (pickedUserLocation) {
+        const address = await getAddress(
+          pickedUserLocation.lat,
+          pickedUserLocation.longt
+        );
+        onLocationPicker({ ...pickedUserLocation, address });
+      }
+    }
+    saveAddress();
   }, [pickedUserLocation, onLocationPicker]);
 
   async function verifyPermissionStatus() {

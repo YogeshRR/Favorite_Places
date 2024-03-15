@@ -44,7 +44,7 @@ function ImagePicker({ onImagePicker }) {
       quality: 0.5,
       aspect: [16, 9],
     });
-    console.log(image.assets[0].uri);
+    //console.log(image.assets[0].uri);
     setImageName(image.assets[0].uri);
     onImagePicker(image.assets[0].uri);
   }
