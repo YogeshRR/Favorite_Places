@@ -5,7 +5,7 @@ import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import Button from "../ui/Button";
 
-function PlaceForm() {
+function PlaceForm({ onCreateData }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
@@ -19,10 +19,14 @@ function PlaceForm() {
     setPickedLocation(location);
   });
   function saveUserLocationHandler() {
+    const data = new Place(enteredTitle, selectedImage, pickedLocation);
+
+    onCreateData(data);
     console.log(enteredTitle);
     console.log(selectedImage);
     console.log(pickedLocation);
   }
+
   return (
     <ScrollView style={styles.form}>
       <View>
