@@ -1,7 +1,11 @@
 import { View, StyleSheet, Alert, Image, Text } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Colors } from "../../Constants/Colors";
-import { useNavigation } from "@react-navigation/native";
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from "@react-navigation/native";
 
 import {
   getCurrentPositionAsync,
@@ -10,16 +14,36 @@ import {
 } from "expo-location";
 
 import OutlinedButton from "../ui/OutlinedButton";
+import PlaceForm from "./PlaceForm";
 
 const GEOAPIFY_KEY = "6e109e58697b49b2bbe3a76f5f46df96";
 const lat = "";
 const long = "";
 
-function LocationPicker() {
+function LocationPicker({ onLocationPicker }) {
   const [pickedUserLocation, setPickedUserLocation] = useState();
   const [locationInformationPermission, setLocationInformationPermission] =
     useForegroundPermissions();
   const navigation = useNavigation();
+
+  const route = useRoute();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (route.params) {
+      const userSelectedLocation = {
+        lat: route.params.latitude,
+        longt: route.params.longitude,
+      };
+      console.log(userSelectedLocation.longt);
+      setPickedUserLocation(userSelectedLocation);
+    }
+  }, [route]);
+
+  useEffect(() => {
+    onLocationPicker(pickedUserLocation);
+  }, [pickedUserLocation, onLocationPicker]);
+
   async function verifyPermissionStatus() {
     if (
       locationInformationPermission.status === PermissionStatus.UNDETERMINED
@@ -61,8 +85,6 @@ function LocationPicker() {
         }}
       />
     );
-  }
-  if (mapPreViewInstance) {
   }
 
   function getMapPreview() {

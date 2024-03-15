@@ -8,8 +8,9 @@ import { useState } from "react";
 import { Colors } from "../../Constants/Colors";
 
 import OutlinedButton from "../ui/OutlinedButton";
+import PlaceForm from "./PlaceForm";
 
-function ImagePicker() {
+function ImagePicker({ onImagePicker }) {
   const [imageName, setImageName] = useState("");
   const [cameraPermissionInformation, requestForPermission] =
     useCameraPermissions();
@@ -45,6 +46,7 @@ function ImagePicker() {
     });
     console.log(image.assets[0].uri);
     setImageName(image.assets[0].uri);
+    onImagePicker(image.assets[0].uri);
   }
 
   var imageSource = <Image style={styles.image} source={{ uri: imageName }} />;
