@@ -1,12 +1,16 @@
 import { Pressable, View, Image, StyleSheet, Text } from "react-native";
+import { Colors } from "../../Constants/Colors";
 
 function PlaceItem({ place, onSelect }) {
   return (
-    <Pressable onPress={onSelect}>
-      <Image source={{ uri: place.imageUrl }} />
+    <Pressable
+      style={({ pressed }) => [styles.item, pressed && styles.pressed]}
+      onPress={onSelect}
+    >
+      <Image style={styles.image} source={{ uri: place.imageUrl }} />
       <View>
-        <Text>{place.title} </Text>
-        <Text>{place.address} </Text>
+        <Text style={styles.title}>{place.title} </Text>
+        <Text style={styles.address}>{place.address} </Text>
       </View>
     </Pressable>
   );
@@ -14,4 +18,45 @@ function PlaceItem({ place, onSelect }) {
 
 export default PlaceItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  item: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    borderRadius: 6,
+    marginVertical: 12,
+    backgroundColor: Colors.primary500,
+    elevation: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 2,
+    height: 100,
+  },
+  pressed: {
+    opacity: 0.9,
+  },
+  image: {
+    flex: 1,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    borderBottomRightRadius: 4,
+    borderTopLeftRadius: 4,
+
+    width: 100,
+  },
+  info: {
+    flex: 2,
+    padding: 12,
+  },
+  title: {
+    marginHorizontal: 5,
+    marginVertical: 15,
+    fontWeight: "bold",
+    fontSize: 12,
+  },
+  address: {
+    marginHorizontal: 5,
+    fontSize: 12,
+    color: Colors.gray700,
+  },
+});
