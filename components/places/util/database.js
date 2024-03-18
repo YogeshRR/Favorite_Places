@@ -1,4 +1,5 @@
 import * as SQLite from "expo-sqlite";
+import { Place } from "../../../model/place";
 const database = SQLite.openDatabase("places.db");
 
 export function init() {
@@ -25,4 +26,29 @@ export function init() {
   });
 
   return promise;
+}
+
+export function insertPlace(place) {
+  const promise = Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `INSERT INTO place (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+        [
+          place.title,
+          place.imageUri,
+          place.address,
+          place.location.lat,
+          place.location.lng,
+        ],
+        (_, result) => {
+          console.log(result);
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+    return promise;
+  });
 }
