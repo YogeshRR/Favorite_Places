@@ -22,7 +22,7 @@ function PlaceForm({ onCreateData }) {
   function saveUserLocationHandler() {
     var id = new Date().toString() + Math.random.toString();
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
-    console.log(placeData);
+    // console.log(placeData);
     onCreateData(placeData);
   }
 

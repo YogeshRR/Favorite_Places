@@ -19,7 +19,7 @@ export default function App() {
         setDbInitaized(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
   const Stack = createNativeStackNavigator();

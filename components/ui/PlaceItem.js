@@ -2,6 +2,7 @@ import { Pressable, View, Image, StyleSheet, Text } from "react-native";
 import { Colors } from "../../Constants/Colors";
 
 function PlaceItem({ place, onSelect }) {
+  //console.log(`Image result :- ${place.imageUrl}`);
   return (
     <Pressable
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
@@ -36,13 +37,13 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   image: {
-    flex: 1,
-    marginVertical: 10,
-    marginHorizontal: 5,
+    flex: 0.5,
+    marginVertical: 1,
+    marginHorizontal: 1,
     borderBottomRightRadius: 4,
     borderTopLeftRadius: 4,
-
-    width: 100,
+    width: 50,
+    height: 100,
   },
   info: {
     flex: 2,
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 15,
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 14,
   },
   address: {
     marginHorizontal: 5,
