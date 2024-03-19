@@ -7,37 +7,41 @@ import OutlinedButton from "../components/ui/OutlinedButton";
 
 function PlaceDetail({ route, navigation }) {
   const [placeDetail, setPlaceDetail] = useState();
-  function ShowonMapHandler() {}
+  function ShowonMapHandler() {
+    console.log(placeDetail.location.long);
+    navigation.navigate("Maps", {
+      selectedLat: placeDetail.location.lat,
+      selectedLng: placeDetail.location.long,
+    });
+  }
   const selectedPlaceId = route.params.placeId;
   useEffect(() => {
     async function loadPlaceDetail() {
       const place = await fetchPlaceListDetail(selectedPlaceId);
       console.log("I am at Place Detail screen");
-      console.log(place.rows._array[0]["address"]);
+      console.log(place.title);
       setPlaceDetail(place);
       navigation.setOptions({
-        title: placeDetail.rows._array[0]["title"],
+        title: placeDetail.title,
       });
     }
     loadPlaceDetail();
   }, [selectedPlaceId]);
   return (
-    <ScrollView>
-      <Image
-        style={styles.image}
-        source={{ uri: placeDetail.rows._array[0]["imageUri"] }}
-      />
-      <View style={styles.locationContainer}>
-        <View style={styles.addressContainer}>
-          <Text style={styles.address}>
-            {placeDetail.rows._array[0]["address"]}
-          </Text>
+    console.log(placeDetail),
+    (
+      <ScrollView>
+        <Image style={styles.image} source={{ uri: placeDetail.imageUrl }} />
+        <View style={styles.locationContainer}>
+          <View style={styles.addressContainer}>
+            <Text style={styles.address}>{placeDetail.address}</Text>
+          </View>
+          <OutlinedButton icon="map" onPress={ShowonMapHandler}>
+            View on Map
+          </OutlinedButton>
         </View>
-        <OutlinedButton icon="map" onPress={ShowonMapHandler}>
-          View on Map
-        </OutlinedButton>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    )
   );
 }
 export default PlaceDetail;

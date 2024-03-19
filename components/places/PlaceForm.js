@@ -55,10 +55,12 @@ const styles = StyleSheet.create({
     color: Colors.primary500,
   },
   input: {
+    marginVertical: 8,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
     fontSize: 16,
+    borderBottomColor: Colors.primary700,
     borderBottomWidth: 2,
     backgroundColor: Colors.primary100,
-    marginHorizontal: 8,
-    marginVertical: 8,
   },
 });

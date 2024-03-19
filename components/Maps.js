@@ -3,8 +3,13 @@ import { Alert, StyleSheet } from "react-native";
 import { useState, useLayoutEffect, useCallback } from "react";
 import IconButton from "./ui/IconButton";
 
-export function Maps({ navigation }) {
-  const [selectedLocation, setSelectedLocation] = useState();
+export function Maps({ navigation, route }) {
+  const selectedLocationMine = {
+    lat: route.params.selectedLat,
+    long: route.params.selectedLng,
+  };
+  const [selectedLocation, setSelectedLocation] =
+    useState(selectedLocationMine);
   function selectLocation(event) {
     const lat = event.nativeEvent.coordinate.latitude;
     const long = event.nativeEvent.coordinate.longitude;
@@ -14,9 +19,9 @@ export function Maps({ navigation }) {
     });
   }
   const region = {
-    latitude: 18.5204,
-    longitude: 73.8567,
-    latitudeDelta: 0.7,
+    latitude: selectedLocationMine ? selectedLocationMine.lat : 18.5204,
+    longitude: selectedLocationMine ? selectedLocationMine.long : 73.8567,
+    latitudeDelta: 0.7999,
     longitudeDelta: 0.7988,
   };
 
@@ -34,6 +39,9 @@ export function Maps({ navigation }) {
   }, [navigation, selectedLocation]);
 
   useLayoutEffect(() => {
+    if (selectedLocationMine) {
+      return;
+    }
     navigation.setOptions({
       headerRight: ({ tintColor }) => (
         <IconButton
@@ -44,7 +52,7 @@ export function Maps({ navigation }) {
         />
       ),
     });
-  }, [navigation, saveUserLocation]);
+  }, [navigation, saveUserLocation, selectedLocationMine]);
 
   return (
     <MapView style={styles.map} onPress={selectLocation}>

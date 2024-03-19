@@ -132,7 +132,22 @@ export function fetchPlaceListDetail(id) {
         "SELECT * FROM places WHERE id = ?",
         [id],
         (_, result) => {
-          resolve(result);
+          const db = result.rows._array[0];
+          console.log("I am at Select * from before adding to Place");
+          console.log(db);
+          const place = new Place(
+            db.title,
+            db.imageUri,
+            {
+              lat: db.lat,
+              longt: db.lng,
+              address: db.address,
+            },
+            db.id
+          );
+          console.log("I am at Select * from after adding to Place");
+
+          resolve(place);
         },
         (_, error) => {
           reject(error);
