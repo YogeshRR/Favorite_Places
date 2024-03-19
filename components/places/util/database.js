@@ -98,12 +98,8 @@ export function fetchDatabase() {
         `SELECT * FROM places`,
         [],
         (_, result) => {
-          console.log("I am at success while fetching datase");
           const insertedPlaces = [];
           for (i = 0; i < result.rows._array.length; i++) {
-            console.log("I am here at Fetching data.....");
-            console.log(i);
-            console.log(result.rows._array[i]["address"]);
             insertedPlaces.push(
               new Place(
                 result.rows._array[i]["title"],
@@ -117,17 +113,32 @@ export function fetchDatabase() {
               )
             );
           }
-          //console.log(insertedPlaces);
           resolve(insertedPlaces);
         },
         (_, error) => {
-          console.log("I am at error while fetching datase");
-          console.log(error);
           reject(error);
         }
       );
     });
   });
 
+  return promise;
+}
+
+export function fetchPlaceListDetail(id) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM places WHERE id = ?",
+        [id],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
   return promise;
 }
