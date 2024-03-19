@@ -10,6 +10,7 @@ import AddPlace from "./screens/AddPlace";
 import IconButton from "./components/ui/IconButton";
 import Maps from "./components/Maps";
 import AppLoading from "expo-app-loading";
+import PlaceDetail from "./screens/PlaceDetail";
 
 export default function App() {
   const [dbInitalized, setDbInitaized] = useState(false);
@@ -62,6 +63,7 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Maps" component={Maps} />
+          <Stack.Screen name="PlaceDetail" component={PlaceDetail} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

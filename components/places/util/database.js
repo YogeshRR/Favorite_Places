@@ -70,7 +70,7 @@ export function insertPlace(place) {
         `INSERT INTO places (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
         [
           place.title,
-          "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+          place.imageUrl,
           place.address,
           place.location.lat,
           place.location.long,
@@ -99,11 +99,7 @@ export function fetchDatabase() {
         [],
         (_, result) => {
           console.log("I am at success while fetching datase");
-          //console.log(result);
           const insertedPlaces = [];
-          // result.rows._array[5];
-          //console.log(tempArray["title"]);
-          // console.log(tempArray);
           for (i = 0; i < result.rows._array.length; i++) {
             console.log("I am here at Fetching data.....");
             console.log(i);
@@ -111,7 +107,7 @@ export function fetchDatabase() {
             insertedPlaces.push(
               new Place(
                 result.rows._array[i]["title"],
-                result.rows._array[i]["imageUrl"],
+                result.rows._array[i]["imageUri"],
                 {
                   address: result.rows._array[i]["address"],
                   lat: result.rows._array[i]["lat"],
